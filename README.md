@@ -38,7 +38,7 @@ Clone and install requirements:
 ```
 sudo apt update
 sudo apt install python3 python3-pip can-utils
-git clone https://github.com/<your-repo>/canip_peer.git
+git clone https://github.com/mackelec/CAN_IP.git
 cd canip_peer
 pip3 install -r requirements.txt
 ```
