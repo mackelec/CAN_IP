@@ -35,13 +35,13 @@ With `canip_peer`, you can:
 
 Clone and install requirements:
 
-'''
+```
 sudo apt update
 sudo apt install python3 python3-pip can-utils
 git clone https://github.com/<your-repo>/canip_peer.git
 cd canip_peer
 pip3 install -r requirements.txt
-'''
+```
 
 ---
 
@@ -49,18 +49,18 @@ pip3 install -r requirements.txt
 
 ### CAN-USB Adapter (CandleLight/gs_usb)
 
-'''
+```
 sudo ip link set can0 up type can bitrate 500000
 ip -details link show can0
-'''
+```
 
 ### Virtual CAN (VCAN) — for testing
 
-'''
+```
 sudo modprobe vcan
 sudo ip link add dev vcan0 type vcan
 sudo ip link set vcan0 up
-'''
+```
 
 ---
 
@@ -68,18 +68,18 @@ sudo ip link set vcan0 up
 
 ### Raspberry Pi (server)
 
-'''
+```
 python3 canip_peer.py server --can can0 --port 3333 --log-level INFO
-'''
+```
 
 ### Linux PC (client)
 
-'''
+```
 sudo ip link add dev vcan0 type vcan
 sudo ip link set vcan0 up
 
 python3 canip_peer.py client --can vcan0 --host <pi-ip> --port 3333 --heartbeat 2 --log-level INFO
-'''
+```
 
 Now all traffic from `can0` on the Pi will appear on the PC’s `vcan0`.
 
@@ -89,7 +89,7 @@ Now all traffic from `can0` on the Pi will appear on the PC’s `vcan0`.
 
 ### 1. VCAN only (single machine)
 
-'''
+```
 # Terminal 1 — server
 python3 canip_peer.py server --can vcan0 --port 3333
 
@@ -101,23 +101,23 @@ cansend vcan0 123#11223344
 
 # Terminal 4 — receive
 candump vcan1
-'''
+```
 
 ### 2. Raspberry Pi to Linux Desktop
 
 **On Raspberry Pi:**
-'''
+```
 sudo ip link set can0 up type can bitrate 500000
 python3 canip_peer.py server --can can0 --port 3333 --log-level INFO
-'''
+```
 
 **On Linux Desktop:**
-'''
+```
 sudo ip link add dev vcan0 type vcan
 sudo ip link set vcan0 up
 python3 canip_peer.py client --can vcan0 --host <pi-ip> --port 3333 --heartbeat 2 --log-level INFO
 candump vcan0
-'''
+```
 
 ---
 
